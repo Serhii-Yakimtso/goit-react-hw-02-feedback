@@ -8,16 +8,25 @@ class Feedback extends Component {
   handleCkick = (e) => {
     // console.log("button: ", e.target.name);
     this.setState((prev) => ({ [e.target.name]: prev[e.target.name] + 1 }));
+
     // console.log("state ", this.state);
   };
 
-  render() {
-    const { state, handleCkick } = this;
+  countTotalFeedback = (a, b, c) => {
+    return a + b + c;
+  };
 
-    // console.log("state ", state);
-    // console.log("state.good ", state.good);
-    // console.log("state.neutral ", state.neutral);
-    // console.log("state.bad ", state.bad);
+  countPositiveFeedbackPercentage = (a, x) => {
+    return (a / x) * 100;
+  };
+
+  render() {
+    const {
+      state,
+      handleCkick,
+      countTotalFeedback,
+      countPositiveFeedbackPercentage,
+    } = this;
 
     return (
       <>
@@ -54,6 +63,19 @@ class Feedback extends Component {
             <li className="statisticsItem">Good: {state.good}</li>
             <li className="statisticsItem">Neutral: {state.neutral}</li>
             <li className="statisticsItem">Bad: {state.bad}</li>
+            <li className="statisticsItem">
+              Total: {countTotalFeedback(state.good, state.neutral, state.bad)}
+            </li>
+            <li className="statisticsItem">
+              Positive feedback:{" "}
+              {Math.round(
+                countPositiveFeedbackPercentage(
+                  state.good,
+                  countTotalFeedback(state.good, state.neutral, state.bad)
+                )
+              )}
+              %
+            </li>
           </ul>
         </section>
       </>
@@ -61,34 +83,4 @@ class Feedback extends Component {
   }
 }
 
-// function App() {
-//   return (
-//     <div className="App">
-// <h2 className="title">Please leave feedback</h2>
-
-// <ul className="feedbackList">
-//   <li className="feedbackItem">
-//     <button className="feedbackBtn">good</button>
-//   </li>
-//   <li className="feedbackItem">
-//     <button className="feedbackBtn">neutral</button>
-//   </li>
-//   <li className="feedbackItem">
-//     <button className="feedbackBtn">bad</button>
-//   </li>
-// </ul>
-
-// <h2 className="title">Statistics</h2>
-
-// <ul className="statisticsList">
-//   <li className="statisticsItem">good</li>
-//   <li className="statisticsItem">neutral</li>
-//   <li className="statisticsItem">bad</li>
-//   <class></class>
-// </ul>
-//     </div>
-//   );
-// }
-
-// export default App;
 export default Feedback;
