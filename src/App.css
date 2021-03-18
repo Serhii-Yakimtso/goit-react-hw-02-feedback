@@ -1,0 +1,17 @@
+.feedbackItem,
+.statisticsItem {
+  list-style-type: none;
+}
+
+.feedbackList {
+  display: flex;
+  padding: 0;
+}
+
+.feedbackItem:not(:last-child) {
+  margin-right: 10px;
+}
+
+.statisticsList {
+  padding-left: 0;
+}
